@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INSIGNIA 2024 - ACES Annual Technical Fest">
+    <title>INSIGNIA 2024 | ACES</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #0a0e27;
+            --bg-darker: #050814;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #b968ff;
+            --accent-pink: #ff2e97;
+            --accent-orange: #ff6b35;
+            --glow-cyan: rgba(0, 240, 255, 0.5);
+            --glow-purple: rgba(185, 104, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .gradient-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-cyan), transparent);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .gradient-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-purple), transparent);
+            top: 40%;
+            right: -10%;
+            animation-delay: 5s;
+        }
+
+        .gradient-3 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--accent-pink), transparent);
+            bottom: -10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+        }
+
+        /* Grid Lines */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 30s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(60px);
+            }
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: particle-float 15s ease-in-out infinite;
+        }
+
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px var(--glow-cyan);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px var(--glow-cyan));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--glow-purple));
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::before {
+            content: '//';
+            position: absolute;
+            left: -20px;
+            color: var(--accent-cyan);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+            left: -25px;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        .register-btn {
+            font-family: 'Orbitron', sans-serif;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .register-btn:hover::before {
+            left: 100%;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 40px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--accent-cyan);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--accent-cyan);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--accent-cyan);
+            padding-left: 1.5rem;
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1100px;
+        }
+
+        .year-badge {
+            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50px;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: 8px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            position: relative;
+        }
+
+        .title-main {
+            background: linear-gradient(135deg, #fff, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+            text-shadow: 0 0 80px var(--glow-cyan);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px var(--glow-cyan));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px var(--glow-purple));
+            }
+        }
+
+        .title-sub {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            letter-spacing: 4px;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        /* Stats Counter */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            animation: fadeInUp 0.8s ease-out 1s both;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.3);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* CTA Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 1.2s both;
+        }
+
+        .btn {
+            font-family: 'Orbitron', sans-serif;
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+            color: white;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 50px rgba(0, 240, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 240, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        .scroll-indicator i {
+            color: var(--accent-cyan);
+            filter: drop-shadow(0 0 10px var(--glow-cyan));
+        }
+
+        /* Info Section */
+        .info-section {
+            position: relative;
+            padding: 6rem 2rem;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .info-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.3);
+        }
+
+        .info-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1.5rem;
+            color: var(--accent-cyan);
+            filter: drop-shadow(0 0 15px var(--glow-cyan));
+        }
+
+        .info-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Events Section */
+        .events-section {
+            position: relative;
+            padding: 6rem 2rem;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-badge {
+            font-family: 'Space Mono', monospace;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(185, 104, 255, 0.1);
+            border: 1px solid var(--accent-purple);
+            border-radius: 50px;
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, white, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Event Cards */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.8), rgba(5, 8, 20, 0.9));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                var(--accent-cyan),
+                transparent 30%
+            );
+            animation: rotate 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .event-card:hover::before {
+            opacity: 0.15;
+        }
+
+        .event-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 25px 70px rgba(0, 240, 255, 0.4);
+        }
+
+        .event-card-inner {
+            position: relative;
+            z-index: 2;
+            padding: 0;
+        }
+
+        .event-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(185, 104, 255, 0.1));
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .event-category {
+            font-family: 'Space Mono', monospace;
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .category-hackathon {
+            background: rgba(255, 46, 151, 0.2);
+            color: var(--accent-pink);
+            border: 1px solid var(--accent-pink);
+            box-shadow: 0 0 15px rgba(255, 46, 151, 0.3);
+        }
+
+        .category-competition {
+            background: rgba(185, 104, 255, 0.2);
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+            box-shadow: 0 0 15px rgba(185, 104, 255, 0.3);
+        }
+
+        .category-workshop {
+            background: rgba(0, 240, 255, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        .category-talk {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .event-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .event-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .event-body {
+            padding: 2rem;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .meta-icon {
+            width: 1.2rem;
+            height: 1.2rem;
+            color: var(--accent-cyan);
+        }
+
+        .event-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .prize-badge {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--glow-cyan);
+        }
+
+        .event-register-btn {
+            font-family: 'Orbitron', sans-serif;
+            padding: 0.75rem 1.75rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .event-register-btn:hover::before {
+            left: 100%;
+        }
+
+        .event-register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            background: rgba(5, 8, 20, 0.9);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            border-radius: 50%;
+            color: var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+        }
+
+        .footer-text {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-title {
+                letter-spacing: 4px;
+            }
+
+            .title-sub {
+                letter-spacing: 2px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="grid-overlay"></div>
+        <div class="bg-gradient gradient-1"></div>
+        <div class="bg-gradient gradient-2"></div>
+        <div class="bg-gradient gradient-3"></div>
+        <!-- Particles will be added via JS -->
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">INSIGNIA</div>
+            
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#events" class="nav-link">Events</a>
+                <a href="#schedule" class="nav-link">Schedule</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i data-lucide="menu" style="width: 1.5rem; height: 1.5rem;"></i>
+            </button>
+            
+            <button class="register-btn" id="mainRegisterBtn">
+                REGISTER NOW
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="mobile-nav-link">Home</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#events" class="mobile-nav-link">Events</a>
+        <a href="#schedule" class="mobile-nav-link">Schedule</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="year-badge">FEBRUARY 15-16, 2024</div>
+            
+            <h1 class="hero-title">
+                <span class="title-main">INSIGNIA</span>
+                <span class="title-sub">ACES TECH FEST</span>
+            </h1>
+            
+            <p class="hero-tagline">
+                Where Innovation Meets Excellence
+            </p>
+            
+            <p class="hero-description">
+                Join us for the biggest technical festival of the year. Two days of intense competitions, 
+                groundbreaking workshops, and transformative hackathons. Push your limits, showcase your 
+                skills, and network with industry pioneers.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Events</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Participants</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">₹50K+</span>
+                    <span class="stat-label">Prize Pool</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">48</span>
+                    <span class="stat-label">Hours</span>
+                </div>
+            </div>
+
+            <div class="cta-group">
+                <button class="btn btn-primary" onclick="scrollToEvents()">
+                    <i data-lucide="zap" style="width: 1.25rem; height: 1.25rem;"></i>
+                    EXPLORE EVENTS
+                </button>
+                <a href="#schedule" class="btn btn-secondary">
+                    <i data-lucide="calendar" style="width: 1.25rem; height: 1.25rem;"></i>
+                    VIEW SCHEDULE
+                </a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <i data-lucide="chevron-down" style="width: 2rem; height: 2rem;"></i>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="about" class="info-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <i data-lucide="map-pin" class="info-icon"></i>
+                    <div class="info-title">Location</div>
+                    <div class="info-value">ITNU Campus</div>
+                </div>
+                <div class="info-card">
+                    <i data-lucide="clock" class="info-icon"></i>
+                    <div class="info-title">Duration</div>
+                    <div class="info-value">2 Days</div>
+                </div>
+                <div class="info-card">
+                    <i data-lucide="users" class="info-icon"></i>
+                    <div class="info-title">Footfall</div>
+                    <div class="info-value">500+ Students</div>
+                </div>
+                <div class="info-card">
+                    <i data-lucide="trophy" class="info-icon"></i>
+                    <div class="info-title">Total Prizes</div>
+                    <div class="info-value">₹50,000+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">// COMPETITIONS & WORKSHOPS</div>
+                <h2 class="section-title">FEATURED EVENTS</h2>
+                <p class="section-subtitle">
+                    Choose your battlefield and showcase your skills across diverse technical domains
+                </p>
+            </div>
+
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events will be dynamically inserted -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">INSIGNIA 2024</div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="GitHub">
+                    <i data-lucide="github" style="width: 1.25rem; height: 1.25rem;"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Instagram">
+                    <i data-lucide="instagram" style="width: 1.25rem; height: 1.25rem;"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="LinkedIn">
+                    <i data-lucide="linkedin" style="width: 1.25rem; height: 1.25rem;"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Twitter">
+                    <i data-lucide="twitter" style="width: 1.25rem; height: 1.25rem;"></i>
+                </a>
+            </div>
+
+            <p class="footer-text">
+                © 2024 ACES, Institute of Technology, Nirma University. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Sub-events data
+        const subEvents = [
+            {
+                id: "hack_01",
+                title: "CodeStorm Hackathon",
+                category: "Hackathon",
+                description: "24-hour coding marathon to build innovative solutions. Form teams and compete for the grand prize with cutting-edge technology.",
+                date: "February 15-16",
+                time: "24 Hours Non-Stop",
+                venue: "Tech Hub",
+                prize: "₹15,000",
+                team: "2-4 members",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "comp_01",
+                title: "Algo Master Challenge",
+                category: "Competition",
+                description: "Competitive programming contest testing your algorithmic prowess and problem-solving abilities under pressure.",
+                date: "February 15",
+                time: "10:00 AM - 2:00 PM",
+                venue: "Lab 304",
+                prize: "₹8,000",
+                team: "Individual",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "work_01",
+                title: "Web3 & Blockchain",
+                category: "Workshop",
+                description: "Hands-on workshop on blockchain technology, smart contracts, and decentralized applications with industry experts.",
+                date: "February 15",
+                time: "2:00 PM - 5:00 PM",
+                venue: "Auditorium",
+                prize: "Certificates",
+                team: "Individual",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "comp_02",
+                title: "UI/UX Design Battle",
+                category: "Competition",
+                description: "Design stunning user interfaces and experiences. Showcase your creativity, design thinking, and visual storytelling.",
+                date: "February 16",
+                time: "9:00 AM - 1:00 PM",
+                venue: "Design Lab",
+                prize: "₹6,000",
+                team: "1-2 members",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "talk_01",
+                title: "Industry Expert Talk",
+                category: "Talk",
+                description: "Insightful session by industry leaders on emerging technologies, career opportunities, and the future of tech innovation.",
+                date: "February 16",
+                time: "11:00 AM - 12:30 PM",
+                venue: "Main Auditorium",
+                prize: "Q&A Session",
+                team: "Open for all",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "comp_03",
+                title: "Tech Quiz Championship",
+                category: "Competition",
+                description: "Test your knowledge across various tech domains. Compete in teams for exciting prizes and bragging rights.",
+                date: "February 16",
+                time: "2:00 PM - 4:00 PM",
+                venue: "Seminar Hall",
+                prize: "₹5,000",
+                team: "2-3 members",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "work_02",
+                title: "AI/ML Bootcamp",
+                category: "Workshop",
+                description: "Deep dive into machine learning algorithms and practical AI applications with hands-on projects and real datasets.",
+                date: "February 15",
+                time: "9:00 AM - 12:00 PM",
+                venue: "Computer Lab",
+                prize: "Certificates",
+                team: "Individual",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "comp_04",
+                title: "Code Debugging Sprint",
+                category: "Competition",
+                description: "Race against time to find and fix bugs in complex codebases. Fast thinking and sharp eyes required!",
+                date: "February 16",
+                time: "3:00 PM - 5:00 PM",
+                venue: "Lab 205",
+                prize: "₹4,000",
+                team: "Individual",
+                registration: "https://docs.google.com/forms"
+            },
+            {
+                id: "comp_05",
+                title: "Tech Treasure Hunt",
+                category: "Competition",
+                description: "Solve tech riddles and complete challenges across campus. Adventure meets technology in this unique quest!",
+                date: "February 15",
+                time: "3:00 PM - 6:00 PM",
+                venue: "Campus Wide",
+                prize: "₹3,000",
+                team: "2-4 members",
+                registration: "https://docs.google.com/forms"
+            }
+        ];
+
+        const categoryClasses = {
+            'Hackathon': 'category-hackathon',
+            'Competition': 'category-competition',
+            'Workshop': 'category-workshop',
+            'Talk': 'category-talk'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            createParticles();
+            renderEvents();
+            setupEventListeners();
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const bg = document.querySelector('.animated-bg');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                bg.appendChild(particle);
+            }
+        }
+
+        // Render events
+        function renderEvents() {
+            const grid = document.getElementById('eventsGrid');
+            
+            subEvents.forEach((event, index) => {
+                const card = createEventCard(event);
+                card.style.animationDelay = `${index * 0.1}s`;
+                grid.appendChild(card);
+            });
+            
+            lucide.createIcons();
+        }
+
+        // Create event card
+        function createEventCard(event) {
+            const card = document.createElement('div');
+            card.className = 'event-card';
+            
+            card.innerHTML = `
+                <div class="event-card-inner">
+                    <div class="event-header">
+                        <span class="event-category ${categoryClasses[event.category]}">
+                            ${event.category}
+                        </span>
+                        <h3 class="event-title">${event.title}</h3>
+                        <p class="event-description">${event.description}</p>
+                    </div>
+                    
+                    <div class="event-body">
+                        <div class="event-meta">
+                            <div class="meta-row">
+                                <i data-lucide="calendar" class="meta-icon"></i>
+                                <span>${event.date}</span>
+                            </div>
+                            <div class="meta-row">
+                                <i data-lucide="clock" class="meta-icon"></i>
+                                <span>${event.time}</span>
+                            </div>
+                            <div class="meta-row">
+                                <i data-lucide="map-pin" class="meta-icon"></i>
+                                <span>${event.venue}</span>
+                            </div>
+                            <div class="meta-row">
+                                <i data-lucide="users" class="meta-icon"></i>
+                                <span>${event.team}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-footer">
+                        <span class="prize-badge">${event.prize}</span>
+                        <button class="event-register-btn" onclick="window.open('${event.registration}', '_blank')">
+                            REGISTER
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mobile menu
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileToggle.querySelector('i');
+                const isOpen = mobileMenu.classList.contains('active');
+                icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+                lucide.createIcons();
+            });
+
+            // Mobile menu links
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    icon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = anchor.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Register button
+            document.getElementById('mainRegisterBtn').addEventListener('click', () => {
+                window.open('https://docs.google.com/forms', '_blank');
+            });
+
+            // Parallax effect for hero
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-content');
+                if (hero && scrolled < window.innerHeight) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
+                }
+            });
+        }
+
+        // Scroll to events
+        function scrollToEvents() {
+            document.getElementById('events').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
